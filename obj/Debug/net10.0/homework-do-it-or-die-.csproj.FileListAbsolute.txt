@@ -1,0 +1,14 @@
+C:\Users\adko07001\Desktop\Github\homework-do-it-or-die-\bin\Debug\net10.0\homework-do-it-or-die-.exe
+C:\Users\adko07001\Desktop\Github\homework-do-it-or-die-\bin\Debug\net10.0\homework-do-it-or-die-.deps.json
+C:\Users\adko07001\Desktop\Github\homework-do-it-or-die-\bin\Debug\net10.0\homework-do-it-or-die-.runtimeconfig.json
+C:\Users\adko07001\Desktop\Github\homework-do-it-or-die-\bin\Debug\net10.0\homework-do-it-or-die-.dll
+C:\Users\adko07001\Desktop\Github\homework-do-it-or-die-\bin\Debug\net10.0\homework-do-it-or-die-.pdb
+C:\Users\adko07001\Desktop\Github\homework-do-it-or-die-\obj\Debug\net10.0\homework-do-it-or-die-.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\adko07001\Desktop\Github\homework-do-it-or-die-\obj\Debug\net10.0\homework-do-it-or-die-.AssemblyInfoInputs.cache
+C:\Users\adko07001\Desktop\Github\homework-do-it-or-die-\obj\Debug\net10.0\homework-do-it-or-die-.AssemblyInfo.cs
+C:\Users\adko07001\Desktop\Github\homework-do-it-or-die-\obj\Debug\net10.0\homework-do-it-or-die-.csproj.CoreCompileInputs.cache
+C:\Users\adko07001\Desktop\Github\homework-do-it-or-die-\obj\Debug\net10.0\homework-do-it-or-die-.dll
+C:\Users\adko07001\Desktop\Github\homework-do-it-or-die-\obj\Debug\net10.0\refint\homework-do-it-or-die-.dll
+C:\Users\adko07001\Desktop\Github\homework-do-it-or-die-\obj\Debug\net10.0\homework-do-it-or-die-.pdb
+C:\Users\adko07001\Desktop\Github\homework-do-it-or-die-\obj\Debug\net10.0\homework-do-it-or-die-.genruntimeconfig.cache
+C:\Users\adko07001\Desktop\Github\homework-do-it-or-die-\obj\Debug\net10.0\ref\homework-do-it-or-die-.dll
