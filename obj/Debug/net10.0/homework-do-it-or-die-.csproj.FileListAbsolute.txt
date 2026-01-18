@@ -12,3 +12,4 @@ C:\Users\adko07001\Desktop\Github\homework-do-it-or-die-\obj\Debug\net10.0\refin
 C:\Users\adko07001\Desktop\Github\homework-do-it-or-die-\obj\Debug\net10.0\homework-do-it-or-die-.pdb
 C:\Users\adko07001\Desktop\Github\homework-do-it-or-die-\obj\Debug\net10.0\homework-do-it-or-die-.genruntimeconfig.cache
 C:\Users\adko07001\Desktop\Github\homework-do-it-or-die-\obj\Debug\net10.0\ref\homework-do-it-or-die-.dll
+C:\Users\adko07001\Desktop\Github\homework-do-it-or-die-\obj\Debug\net10.0\homework-do-it-or-die-.sourcelink.json

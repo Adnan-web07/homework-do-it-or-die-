@@ -1,180 +1,182 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Runtime.Intrinsics.Arm;
-Stopwatch SW = new Stopwatch();
-Console.WriteLine("Choose a sorting algorithm (1 for Bubble Sort, 2 for Selection Sort, 3 for Insertion Sort, 4 for Merg sort, 5 for Quick sort) : ");
-int choice = int.Parse(Console.ReadLine());
 
+Stopwatch sw = new Stopwatch();
+Console.WriteLine("Choose a sorting algorithm (1 for Bubble Sort, 2 for Selection Sort, 3 for Insertion Sort, 4 for Merge Sort, 5 for Quick Sort): ");
 
-int number = 10;
-Random random = new Random();
-
-List<int> kevin = new List<int>();
-for (int i = 0; i < number; i++)
+int choice;
+try
 {
-    
-    kevin.Add(random.Next(1, 100000000));
-   
+    choice = int.Parse(Console.ReadLine());
+}
+catch (FormatException)
+{
+    Console.WriteLine("Invalid input. Please enter a number.");
+    return;
 }
 
-void Bubblesort()
+int number = 10; // You can make this configurable later
+Random random = new Random();
+
+List<int> numbers = new List<int>();
+for (int i = 0; i < number; i++)
 {
-for(int i = 0; i < kevin.Count -1; i++)
+    numbers.Add(random.Next(1, 100)); // Smaller range for easier testing
+}
+
+void BubbleSort()
 {
-    for(int j = 0; j < kevin.Count -1 - i; j++)
+    for (int i = 0; i < numbers.Count - 1; i++)
     {
-        if(kevin[j] > kevin[j + 1])
+        for (int j = 0; j < numbers.Count - 1 - i; j++)
         {
-            int temp = kevin[j];
-            kevin[j] = kevin[j + 1];
-            kevin[j + 1] = temp;
+            if (numbers[j] > numbers[j + 1])
+            {
+                int temp = numbers[j];
+                numbers[j] = numbers[j + 1];
+                numbers[j + 1] = temp;
+            }
         }
     }
 }
 
-}
-
-void SelectionSort() {
-
-    for (int i = 0; i < kevin.Count; i++) {
-
+void SelectionSort()
+{
+    for (int i = 0; i < numbers.Count; i++)
+    {
         int smallestIndex = i;
-        for (int j = i + 1; j < kevin.Count; j++) {
-            if (kevin[j] < kevin[smallestIndex]) {
+        for (int j = i + 1; j < numbers.Count; j++)
+        {
+            if (numbers[j] < numbers[smallestIndex])
+            {
                 smallestIndex = j;
             }
         }
-
-        int tmp = kevin[smallestIndex];
-        kevin[smallestIndex] = kevin[i];
-        kevin[i] = tmp;
+        int temp = numbers[smallestIndex];
+        numbers[smallestIndex] = numbers[i];
+        numbers[i] = temp;
     }
 }
 
 void InsertionSort()
 {
-     for (int i = 0; i < kevin.Count - 1; i++)
-         {
-             for (int j = i + 1; j > 0; j--)
-
-            {if (kevin[j - 1] > kevin[j])
-                {                        int temp = kevin[j - 1];
-                    kevin[j - 1] = kevin[j];
-                    
-                    kevin[j] = temp;
-            }
-        }
-    }
-}
-
-void Mergsort()
-{
-    for(int i = 0; i < kevin.Count -1; i++)
+    for (int i = 1; i < numbers.Count; i++)
     {
-        for(int j = 0; j < kevin.Count -1 - i; j++)
+        int key = numbers[i];
+        int j = i - 1;
+        while (j >= 0 && numbers[j] > key)
         {
-            if(kevin[j] > kevin[j + 1])
-            {
-                int temp = kevin[j];
-                kevin[j] = kevin[j + 1];
-                kevin[j + 1] = temp;
-            }
+            numbers[j + 1] = numbers[j];
+            j--;
         }
+        numbers[j + 1] = key;
     }
 }
 
-void Quicksort()
+void MergeSort(List<int> list)
 {
-    { List<int> QuickSort(List<int> list)
-        {
-            if (list.Count <= 1)
-            {
-                return list;
-            }
+    if (list.Count <= 1) return;
 
-            int pivot = list[list.Count / 2];
-            List<int> left = new List<int>();
-            List<int> right = new List<int>();
-            List<int> equal = new List<int>();
+    int mid = list.Count / 2;
+    List<int> left = list.GetRange(0, mid);
+    List<int> right = list.GetRange(mid, list.Count - mid);
 
-            foreach (int item in list)
-            {
-                if (item < pivot)
-                {
-                    left.Add(item);
-                }
-                else if (item > pivot)
-                {
-                    right.Add(item);
-                }
-                else
-                {
-                    equal.Add(item);
-                }
-            }
-
-            List<int> sortedLeft = QuickSort(left);
-            List<int> sortedRight = QuickSort(right);
-
-            List<int> result = new List<int>();
-            result.AddRange(sortedLeft);
-            result.AddRange(equal);
-            result.AddRange(sortedRight);
-
-            return result;
-        }
-    }
+    MergeSort(left);
+    MergeSort(right);
+    Merge(list, left, right);
 }
 
-void Kevinlist()
+void Merge(List<int> list, List<int> left, List<int> right)
 {
-    for(int i  = 0; i < kevin.Count; i++ ) 
+    int i = 0, j = 0, k = 0;
+    while (i < left.Count && j < right.Count)
     {
-        Console.WriteLine(kevin[i]); 
+        if (left[i] <= right[j])
+        {
+            list[k++] = left[i++];
+        }
+        else
+        {
+            list[k++] = right[j++];
+        }
     }
-        TimeSpan elapsed = SW.Elapsed;
-        Console.WriteLine($"sorting  {elapsed} and the median is {elapsed.TotalMilliseconds / 2} milliseconds");
-        
+    while (i < left.Count) list[k++] = left[i++];
+    while (j < right.Count) list[k++] = right[j++];
 }
+
+List<int> QuickSort(List<int> list)
+{
+    if (list.Count <= 1) return list;
+
+    int pivot = list[list.Count / 2];
+    List<int> left = new List<int>();
+    List<int> right = new List<int>();
+    List<int> equal = new List<int>();
+
+    foreach (int item in list)
+    {
+        if (item < pivot) left.Add(item);
+        else if (item > pivot) right.Add(item);
+        else equal.Add(item);
+    }
+
+    List<int> sortedLeft = QuickSort(left);
+    List<int> sortedRight = QuickSort(right);
+
+    List<int> result = new List<int>();
+    result.AddRange(sortedLeft);
+    result.AddRange(equal);
+    result.AddRange(sortedRight);
+    return result;
+}
+
+void PrintList()
+{
+    foreach (int num in numbers)
+    {
+        Console.WriteLine(num);
+    }
+    TimeSpan elapsed = sw.Elapsed;
+    Console.WriteLine($"Sorting took {elapsed.TotalMilliseconds} milliseconds.");
+}
+
 if (choice == 1)
 {
-    SW.Start();
-    Bubblesort();
-    Kevinlist();
-    SW.Stop();
+    sw.Start();
+    BubbleSort();
+    sw.Stop();
+    PrintList();
 }
 else if (choice == 2)
 {
-    SW.Start();
+    sw.Start();
     SelectionSort();
-    Kevinlist();
-    SW.Stop();
+    sw.Stop();
+    PrintList();
 }
-else  if(choice == 3)
+else if (choice == 3)
 {
-    SW.Start();
+    sw.Start();
     InsertionSort();
-    Kevinlist();
-    SW.Stop();
+    sw.Stop();
+    PrintList();
 }
 else if (choice == 4)
 {
-    SW.Start();
-    Mergsort();
-    Kevinlist();
-    SW.Stop();
+    sw.Start();
+    MergeSort(numbers);
+    sw.Stop();
+    PrintList();
 }
 else if (choice == 5)
 {
-    SW.Start();
-    Quicksort();
-    Kevinlist();
-    SW.Stop();
+    sw.Start();
+    numbers = QuickSort(numbers);
+    sw.Stop();
+    PrintList();
 }
 else
 {
     Console.WriteLine("Invalid choice.");
 }
-Bubblesort();
-SelectionSort();
