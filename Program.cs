@@ -16,13 +16,13 @@ catch (FormatException)
     return;
 }
 
-int number = 10; // You can make this configurable later
+int number = 10;
 Random random = new Random();
 
 List<int> numbers = new List<int>();
 for (int i = 0; i < number; i++)
 {
-    numbers.Add(random.Next(1, 100)); // Smaller range for easier testing
+    numbers.Add(random.Next(1, 100)); 
 }
 
 void BubbleSort()
@@ -104,32 +104,47 @@ void Merge(List<int> list, List<int> left, List<int> right)
     while (i < left.Count) list[k++] = left[i++];
     while (j < right.Count) list[k++] = right[j++];
 }
-
 List<int> QuickSort(List<int> list)
 {
-    if (list.Count <= 1) return list;
-
-    int pivot = list[list.Count / 2];
-    List<int> left = new List<int>();
-    List<int> right = new List<int>();
-    List<int> equal = new List<int>();
-
-    foreach (int item in list)
-    {
-        if (item < pivot) left.Add(item);
-        else if (item > pivot) right.Add(item);
-        else equal.Add(item);
-    }
-
-    List<int> sortedLeft = QuickSort(left);
-    List<int> sortedRight = QuickSort(right);
-
-    List<int> result = new List<int>();
-    result.AddRange(sortedLeft);
-    result.AddRange(equal);
-    result.AddRange(sortedRight);
-    return result;
+    QuickSortRecursive(list, 0, list.Count - 1);
+    return list;
 }
+
+void QuickSortRecursive(List<int> list, int low, int high)
+{
+    if (low < high)
+    {
+        int pivotIndex = Partition(list, low, high);
+        QuickSortRecursive(list, low, pivotIndex - 1);
+        QuickSortRecursive(list, pivotIndex + 1, high);
+    }
+}
+
+int Partition(List<int> list, int low, int high)
+{
+    int pivot = list[high];
+    int i = (low - 1);
+
+    for (int j = low; j < high; j++)
+    {
+        if (list[j] <= pivot)
+        {
+            i++;
+           
+            int temp = list[i];
+            list[i] = list[j];
+            list[j] = temp;
+        }
+    }
+    
+   
+    int tempPivot = list[i + 1];
+    list[i + 1] = list[high];
+    list[high] = tempPivot;
+    
+    return i + 1;
+}
+
 
 void PrintList()
 {
